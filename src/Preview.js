@@ -1,17 +1,21 @@
-import React from 'react';
-import marked from 'marked';
-
+import React from "react";
+import marked from "marked";
+const renderer = new marked.Renderer();
+marked.setOptions({
+  breaks: true,
+});
 const Preview = (props) => {
-  const result = marked(props.value);
-  props.setResult(result);
-return(
-
-  <div>
-  <h3>Preview</h3>
-  <div id="preview">
-  {result}</div>
-  </div>
-);
+  return (
+    <div>
+      <h3>Preview</h3>
+      <div
+        id="preview"
+        dangerouslySetInnerHTML={{
+          __html: marked(props.value, { renderer: renderer }),
+        }}
+      />
+    </div>
+  );
 };
 
 export default Preview;
